@@ -1,5 +1,7 @@
 {
   "name": "alt-this",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

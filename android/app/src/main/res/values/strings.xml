@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">alt-this</string>
+    <string name="title_activity_main">alt-this</string>
+    <string name="package_name">altthis.com</string>
+    <string name="custom_url_scheme">altthis.com</string>
+</resources>

@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title id="logo">Alt THIS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content
+             class="ion-padding">
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col size="12">
+        <h4>Generate a descriptive label for any image</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div id="img-container">
+          <img [src]="img || '../../assets/image-placeholder.png'"
+               [style.opacity]="img ? 1 : 0.25">
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="labels.length">
+      <ion-col size="12">
+
+        <ion-row id="result">
+          <ion-col size="4"></ion-col>
+          <ion-col id="primaryLabel"
+                   size="4">
+            <h1>{{labels[0]}}</h1>
+          </ion-col>
+          <ion-col size="4"
+                   class="ion-text-right">
+            <ion-button *ngIf="!showOtherLabels"
+                        size="small"
+                        color="medium"
+                        fill="clear"
+                        (click)="showOtherLabels = true; content.scrollToBottom(500)">
+              Not right?
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div *ngIf="showOtherLabels">
+          <p *ngIf="labels.length === 1; else otherLabels">
+            We couldn't generate any more labels for your image. Sorry :(
+          </p>
+          <ng-template #otherLabels>
+            <div id="otherLabels">
+              Other possible labels:
+              <div *ngFor="let l of labels | slice:1; let i = index"
+                   class="other-label"
+                   (click)="setPrimaryLabel(l)">{{l}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <p *ngIf="error"
+           style="color: red">
+          {{error}}
+        </p>
+        <input #imageInput
+               hidden
+               type="file"
+               accept="image/*"
+               (change)="imageUploadEvent(imageInput)">
+
+        <div *ngIf="operationStage; else uploadBtn"
+             id="operationInfo">
+          <ion-spinner></ion-spinner>
+          <span> {{operationStage}}</span>
+        </div>
+
+        <ng-template #uploadBtn>
+          <ion-button (click)="imageInput.click()">
+            <ion-icon slot="start"
+                      name="cloud-upload"></ion-icon>
+            Upload
+          </ion-button>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-note class="ion-margin ion-float-right">© 2020 Alt This · Powered by Google Cloud Vision</ion-note>
+  </ion-toolbar>
+</ion-footer>

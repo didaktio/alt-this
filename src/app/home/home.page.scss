@@ -1,0 +1,52 @@
+ion-row {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#img-container {
+    text-align: center;
+
+    img {
+        max-height: 350px;
+        max-width: 350px;
+        margin: auto;
+    }
+}
+
+#otherLabels {
+    margin: 16px;
+
+    div {
+        cursor: pointer;
+        margin: 4px 0;
+
+        &:hover {
+            font-size: 1.2em;
+        }
+    }
+}
+
+#result {
+    #primaryLabel {
+        background: var(--ion-color-light);
+
+        h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 500;
+        }
+    }
+}
+
+#operationInfo {
+    display: flex;
+    width: fit-content;
+    margin: 16px auto;
+    align-items: center;
+    text-align: center;
+
+    ion-spinner {
+        margin: 8px;
+    }
+}
