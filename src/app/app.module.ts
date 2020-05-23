@@ -10,8 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, ORIGIN } from '@angular/fire/functions';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,13 +23,14 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireFunctionsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    environment.production ? [{ provider: origin, useValue: 'https://alt-this.web.app' }] : []
+    environment.production ? [{ provider: ORIGIN, useValue: 'https://alt-this.web.app' }] : []
   ],
   bootstrap: [AppComponent]
 })
